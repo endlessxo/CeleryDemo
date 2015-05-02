@@ -9,8 +9,9 @@ import imaplib
 import uuid
 from email import email
 import string
-from datetime import datetime
-from datetime import *
+#from datetime import datetime
+#from datetime import *
+#from datetime import date, time
 import psycopg2 
  
 
@@ -110,7 +111,7 @@ class Converter(object):
         } [date]
 
     def to24Hours(self, time):
-        return str(datetime.strptime(time, '%I:%M:%S %p').time())
+        return str(datetime.datetime.strptime(time, '%I:%M:%S %p').time())
 
 
     def get_proper_datetime_syntax(self):
@@ -122,9 +123,9 @@ class Converter(object):
         print "Message Dict - ", self.message
         self.query = ""
         try:
-            self.query = self.query + "INSERT INTO bostonunderwater_beacon (latitude, longitude, water_level, node_number, time) VALUES (" + self.message['Lat'] + ", " + self.message['Long']  + ", " + ColorAnalyzerInt(self.message['Color']).get_water_level() + ", '" + self.message['ID'] + "', '" + self.get_proper_datetime_syntax() + "')"         
+        	self.query = self.query + "INSERT INTO bostonunderwater_beacon (latitude, longitude, water_level, node_number, time) VALUES (" + self.message['Lat'] + ", " + self.message['Long']  + ", " + ColorAnalyzerInt(self.message['Color']).get_water_level() + ", '" + self.message['ID'] + "', '" + self.get_proper_datetime_syntax() + "')"         
         except:
-            self.query = "Invalid"
+        	self.query = "Invalid insert sql query, check the date/time"
         print "Query - ", self.query
         return self.query
 
@@ -203,6 +204,8 @@ class ColorAnalyzerInt(object):
             return "2"
         if int(self.colors['Green']) > int(self.colors['Blue']) and int(self.colors['Green']) > int(self.colors['Red']):
             return "3"
+	else:
+	    return "0"
 
 class ColorAnalyzerHex(object):
     def __init__(self, inputhex):  
