@@ -134,8 +134,10 @@ globvar = 0
 
 @celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=5))
 def foofunc():
-    imap_username = 'abcd'
-    imap_password = 'abcd'
+    #imap_username = 'abcd'
+    #imap_password = 'abcd'
+    imap_username = 'bostonunderwater@gmail.com'
+    imap_password = 'Yahtzee2012'    
     fromaddr = imap_username
     toaddrs = imap_username
     
@@ -157,8 +159,8 @@ globbar = 7777
 
 @celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=10))
 def barfunc():
-    imap_username = 'abcd'
-    imap_password = 'abcd'
+    imap_username = 'bostonunderwater@gmail.com'
+    imap_password = 'Yahtzee2012'
     fromaddr = imap_username
     toaddrs = imap_username
 
